@@ -29,7 +29,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "../BatchReveal.sol";
 
-contract BlockhashExample is ERC721, BatchReveal {
+contract Example is ERC721, BatchReveal {
     using Strings for uint256;
 
     string public baseURI;
