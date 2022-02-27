@@ -26,7 +26,7 @@ contract BlockhashExample is ERC721, BatchReveal {
             _mint(msg.sender, totalSupply);
             totalSupply++;
             if(totalSupply >= (lastTokenRevealed + REVEAL_BATCH_SIZE)){
-                setBatchSeed(uint256(blockhash(block.number)));
+                setBatchSeed(uint256(blockhash(block.number-1)));
             }
         }
     }
