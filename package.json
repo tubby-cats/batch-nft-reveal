@@ -1,0 +1,23 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@0x/subproviders": "^6.6.2",
+    "@chainlink/contracts": "^0.3.1",
+    "@ethersproject/experimental": "^5.5.0",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.5",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@supercharge/promise-pool": "^2.1.0",
+    "axios": "^0.26.0",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.5",
+    "hardhat": "^2.6.1",
+    "hardhat-gas-reporter": "^1.0.7",
+    "@openzeppelin/contracts": "^4.4.2"
+  },
+  "scripts": {
+    "test": "hardhat test"
+  }
+}
