@@ -9,8 +9,8 @@ In this post I'll go over the multiple strategies that NFTs have used to solve t
 ## Offset by a random number
 This is the most common method, after the collection has been fully minted you generate a random number from 0 to 10k and add it to the number of each NFT.
 ```
-normalizedRandom = random % 10e3
-newNumber = (mintNumber + normalizedRandom) % 10e3
+normalizedRandom = random % 10e4
+newNumber = (mintNumber + normalizedRandom) % 10e4
 ```
 
 So if an NFT has been the 2300th to be minted and the random number is 5000, it's new id will be 7300.
@@ -65,7 +65,7 @@ A basic implementation involves picking a random offset from 0 to 10k for each b
 
 However this implementation doesn't distribute batches fully randomly. Just think that, after the first batch has been allocated only 9k places are available, but we are picking a number up to 10k, so we are folding 10k positions over 9k spots, which leads to a probability distribution that favors some numbers over others.
 
-To avoid this, we'll pick a number in $[0, 10^4-10^3batch)$, and then we'll traverse a distance equal to that number, jumping over the spaces that have already been allocated.
+To avoid this, we'll pick a number in $[0, 10^4-10^3batch)$, and then we'll traverse a distance equal to that number, jumping over the spaces that have already been allocated. This is equivalent probabilistically to renumbering open slots from $[0, 10^4-10^3batch)$ and performing offset by random number. Thus, within a batch, properties of offset by a random number are maintained (fully random).
 
 This mechanism has an asymptotic cost of $O(n^2)$ where $n$ is the number of batches that there are. Thus with 10 batches that number is 100, much lower than the 10k we were discussing earlier.
 
