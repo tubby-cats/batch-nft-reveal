@@ -9,8 +9,8 @@ In this post I'll go over the multiple strategies that NFTs have used to solve t
 ## Offset by a random number
 This is the most common method, after the collection has been fully minted you generate a random number from 0 to 10k and add it to the number of each NFT.
 ```
-normalizedRandom = random % 10e4
-newNumber = (mintNumber + normalizedRandom) % 10e4
+normalizedRandom = random % 10e3
+newNumber = (mintNumber + normalizedRandom) % 10e3
 ```
 
 So if an NFT has been the 2300th to be minted and the random number is 5000, it's new id will be 7300.
