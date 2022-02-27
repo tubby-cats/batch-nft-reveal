@@ -61,7 +61,7 @@ The fundamental idea is to extend the first strategy discussed (offset by random
 
 A basic implementation involves picking a random offset from 0 to 10k for each batch, reserving the number at the offset for the batch, and, if there's collision between batch reservations, merge them into one large reservation.
 
-![](https://codimd.s3.shivering-isles.com/demo/uploads/e24435ab42e4287d9369a21ba.png)
+![batch mix](./images/batch-mix.png)
 
 However this implementation doesn't distribute batches fully randomly. Just think that, after the first batch has been allocated only 9k places are available, but we are picking a number up to 10k, so we are folding 10k positions over 9k spots, which leads to a probability distribution that favors some numbers over others.
 
