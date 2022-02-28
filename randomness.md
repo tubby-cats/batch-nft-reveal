@@ -65,7 +65,30 @@ A basic implementation involves picking a random offset from 0 to 10k for each b
 
 However this implementation doesn't distribute batches fully randomly. Just think that, after the first batch has been allocated only 9k places are available, but we are picking a number up to 10k, so we are folding 10k positions over 9k spots, which leads to a probability distribution that favors some numbers over others.
 
-To avoid this, we'll pick a number in $[0, 10^4-10^3batch)$, and then we'll traverse a distance equal to that number, jumping over the spaces that have already been allocated. This is equivalent probabilistically to renumbering open slots from $[0, 10^4-10^3batch)$ and performing offset by random number. Thus, within a batch, properties of offset by a random number are maintained (fully random).
+To avoid this, we'll pick a number in $[0, 10^4-10^3batch)$, and then we'll traverse a distance equal to that number, jumping over the spaces that have already been allocated. This makes each batch a distinct version of offset by random number, meaning that each batch maintains properties of offset by random number. The most interesting of these properties is that it is fully random (i.e., the expected probability of minting all tubbies in the same batch is equal). Below we show that each batch is an instance of offset by random number by providing a 1 to 1 mapping between the procedures for each batch.
+
+In the first batch we mint 1000 with random in $[0, 10^4)$. This leaves 9000 open slots for `newNumber`. This is a vanilla instance of offset by random number.
+
+```
+normalizedRandom = random % 10e3
+newNumber = (mintNumber + normalizedRandom) % 10e3
+```
+
+In the second batch, we mint 1000 with random in $[0, 10^4 - 10^3)$. We traverse a distance equal to that number while jumping over the 1000 filled spaces. Let that special logic live in `add_while_jumping_filled`.
+
+```
+normalizedRandom = random % (10e3 - 10e2)
+newNumber = add_while_jumping_filled(mintNumber, normalizedRandom) % 10e3
+```
+
+Equivalently, we could have taken the 9000 open slots for `newNumber` and renumbered them based on their relative order from [0, 9000) = [0, 10^4 - 10^3). This can be done with a map `f()` where `f(newNumber)` = `indexAmongOpenSlots(newNumber)`. We call these renumbered slots `newNumber_batch2`. We have,
+
+```
+normalizedRandom = random % (10e3 - 10e2)
+newNumber_batch2 = (mintNumber + normalizedRandom) % (10e3 - 10e2)
+```
+
+This is an instance of offset by random number. We can map our `newNumber_batch2` back to `newNumber` with `f_inverse()`. The same can be repeated for subsequent batches.
 
 This mechanism has an asymptotic cost of $O(n^2)$ where $n$ is the number of batches that there are. Thus with 10 batches that number is 100, much lower than the 10k we were discussing earlier.
 
