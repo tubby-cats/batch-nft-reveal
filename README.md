@@ -1,8 +1,8 @@
 # Batch NFT reveal
 
 This repository contains a gas-efficient implementation of an on-chain shuffling algorithm used to reveal NFTs in batches. The main benefits of this over other NFT randomization methods are:
-- Makes the loop between buying and seeing your tubby much lower, which improves experience
-- Keeps attention up through the sale, as new tubbies keep being revealed, instead of just having a single peak of attention at start/reveal
+- Makes the loop between buying and seeing your NFT revealed much faster, which improves experience
+- Keeps attention up through the sale, as new NFTs keep being revealed, instead of just having a single peak of attention at start/reveal
 - Reduces the need to have unrevealed NFTs up for sale, thus making it harder for people to get rarity sniped
 
 For a survey of other ways to randomize NFTs, an analysis on them and an explanation of the algorithm used here, please read [randomness.md](./randomness.md).
