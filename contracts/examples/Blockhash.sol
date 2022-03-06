@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "../BatchReveal.sol";
 
+// This is just an example, do NOT use this contract in production as it can be exploited due to the fact that the last blockhash is known
+
 contract BlockhashExample is ERC721, BatchReveal {
     using Strings for uint256;
 
